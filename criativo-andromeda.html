@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criativo Andromeda — Pack de Criativos POD Prontos para Veicular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080810;
+    --surface: #0f0f1a;
+    --border: #1e1e30;
+    --accent: #6c5ce7;
+    --accent2: #fd79a8;
+    --accent3: #00cec9;
+    --gold: #f9ca24;
+    --text: #e8e8f0;
+    --muted: #6a6a8a;
+    --wpp: #25D366;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* GLOW ORBS */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb-1 { width: 600px; height: 600px; background: rgba(108,92,231,0.12); top: -200px; left: -200px; }
+  .orb-2 { width: 500px; height: 500px; background: rgba(253,121,168,0.08); bottom: 20%; right: -150px; }
+  .orb-3 { width: 400px; height: 400px; background: rgba(0,206,201,0.06); top: 50%; left: 40%; }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,8,16,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+
+  .logo span { color: var(--accent2); }
+
+  .header-cta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--wpp);
+    border: 1px solid var(--wpp);
+    padding: 8px 20px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .header-cta:hover {
+    background: var(--wpp);
+    color: #000;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent3);
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.92;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+  }
+
+  .hero h1 .line1 { color: var(--text); display: block; }
+  .hero h1 .line2 { color: var(--accent); display: block; }
+  .hero h1 .line3 { color: var(--accent2); display: block; }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+    font-weight: 300;
+  }
+
+  .hero-sub strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* PAIN ROW */
+  .pain-row {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+  }
+
+  .pain-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pain-item::before {
+    content: '✗';
+    color: var(--accent2);
+    font-size: 12px;
+  }
+
+  /* SECTION */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* O QUE É */
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+
+  .what-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .what-card:hover { border-color: var(--accent); }
+
+  .what-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .what-card:hover::after { opacity: 1; }
+
+  .what-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .what-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: var(--accent2);
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+
+  .what-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ENTREGA */
+  .entrega-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .entrega-box::before {
+    content: 'O QUE VOCÊ RECEBE';
+    position: absolute;
+    top: -10px; left: 40px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    background: var(--bg);
+    padding: 0 10px;
+  }
+
+  .entrega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .entrega-item h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .entrega-item ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .entrega-item ul li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .entrega-item ul li::before {
+    content: '→';
+    color: var(--accent3);
+    flex-shrink: 0;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* PLANOS */
+  .planos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .plano {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px 32px;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .plano:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .plano.featured {
+    border-color: var(--accent2);
+    background: rgba(253,121,168,0.04);
+  }
+
+  .plano.featured::before {
+    content: 'MAIS ESCOLHIDO';
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--accent2);
+    background: var(--bg);
+    padding: 0 10px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .plano-nome {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .plano-preco {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .plano-preco span {
+    font-size: 20px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  .plano-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .plano-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .plano-items li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .plano-items li::before {
+    content: '✓';
+    color: var(--accent3);
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .plano-btn {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .plano-btn:hover {
+    background: var(--wpp);
+    border-color: var(--wpp);
+    color: #000;
+  }
+
+  .plano.featured .plano-btn {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #000;
+    font-weight: 700;
+  }
+
+  .plano.featured .plano-btn:hover {
+    background: var(--wpp);
+    border-color: var(--wpp);
+  }
+
+  /* ANDROMEDA EXPLAINER */
+  .explainer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .explainer h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+  .explainer h2 em {
+    color: var(--accent2);
+    font-style: normal;
+  }
+
+  .explainer p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .explainer p strong { color: var(--text); font-weight: 500; }
+
+  .eixos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .eixo {
+    padding: 20px 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .eixo-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .e1 .eixo-num { color: var(--accent); }
+  .e2 .eixo-num { color: var(--accent2); }
+  .e3 .eixo-num { color: var(--accent3); }
+
+  .eixo-text h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .eixo-text p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* SEMAFORO */
+  .semaforo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .sem-card {
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .sem-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+  .sem-status { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; }
+  .sem-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .s-green .sem-status { color: #00b894; }
+  .s-yellow .sem-status { color: var(--gold); }
+  .s-red .sem-status { color: var(--accent2); }
+
+  /* BIG CTA */
+  .cta-section {
+    background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(253,121,168,0.08));
+    border: 1px solid var(--accent);
+    padding: 80px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(108,92,231,0.2), transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 100px);
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .cta-section h2 span { color: var(--accent2); }
+
+  .cta-section p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .wpp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--wpp);
+    color: #000;
+    text-decoration: none;
+    padding: 20px 48px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .wpp-btn:hover {
+    background: #1ebe5d;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 60px rgba(37,211,102,0.3);
+  }
+
+  .wpp-btn svg { width: 22px; height: 22px; fill: #000; }
+
+  .cta-note {
+    margin-top: 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    position: relative;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  footer span { color: var(--accent2); }
+
+  /* FADE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge, .hero h1, .hero-sub, .pain-row {
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.35s; }
+  .pain-row { animation-delay: 0.5s; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 16px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    section { padding: 60px 20px; }
+    .what-grid { grid-template-columns: 1fr; }
+    .entrega-grid { grid-template-columns: 1fr; gap: 32px; }
+    .planos-grid { grid-template-columns: 1fr; }
+    .explainer { grid-template-columns: 1fr; gap: 40px; padding: 32px; }
+    .semaforo-strip { grid-template-columns: 1fr; }
+    .cta-section { padding: 60px 24px; }
+    .entrega-box { padding: 40px 24px; }
+    .divider { margin: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Criativo <span>InKrível</span></div>
+  <a href="https://wa.me/5511959519909?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Criativo%20Andromeda%20🚀" target="_blank" class="header-cta">Quero meu pack</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Novo serviço — Criativo InKrível</div>
+  <h1>
+    <span class="line1">CRIATIVO</span>
+    <span class="line2">ANDROMEDA</span>
+    <span class="line3">PACK</span>
+  </h1>
+  <p class="hero-sub">
+    Seu pack de criativos <strong>gerado, avaliado e entregue pronto para veicular</strong> — alinhado à lógica do Meta Andromeda, o algoritmo que decide quem vê o seu anúncio.
+  </p>
+  <div class="pain-row">
+    <div class="pain-item">CPM subindo sem explicação</div>
+    <div class="pain-item">Criativos que parecem diferentes mas não convertem</div>
+    <div class="pain-item">Tráfego pago que não retorna</div>
+    <div class="pain-item">Não saber o que mudar</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- O QUE É O ANDROMEDA -->
+<section>
+  <div class="section-label">O problema que ninguém explica</div>
+  <div class="explainer">
+    <div>
+      <h2>O Andromeda mudou <em>tudo</em></h2>
+      <p>Desde dezembro de 2024, a Meta usa um novo sistema de IA — o <strong>Andromeda</strong> — para decidir quem vê cada anúncio. E ele não funciona mais pela segmentação manual.</p>
+      <p>Agora é o <strong>criativo que encontra o comprador</strong>. O algoritmo lê a imagem, detecta o sinal emocional e distribui para quem está pronto para comprar.</p>
+      <p>O problema: criativos que parecem diferentes para o olho humano podem ser <strong>idênticos para o Andromeda</strong>. Quando isso acontece, eles competem pelo mesmo pool de entrega — CPM sobe, alcance cai.</p>
+    </div>
+    <div class="eixos">
+      <div class="eixo e1">
+        <span class="eixo-num">01</span>
+        <div class="eixo-text">
+          <h4>Conceito narrativo</h4>
+          <p>Identificação · Aspiração · Pertencimento · Humor · Declaração</p>
+        </div>
+      </div>
+      <div class="eixo e2">
+        <span class="eixo-num">02</span>
+        <div class="eixo-text">
+          <h4>Formato</h4>
+          <p>UGC · Vídeo AIDA · Imagem editorial · Carrossel · Copy-first</p>
+        </div>
+      </div>
+      <div class="eixo e3">
+        <span class="eixo-num">03</span>
+        <div class="eixo-text">
+          <h4>Tom emocional</h4>
+          <p>Empoderador · Emotivo · Bem-humorado · Íntimo · Urgente</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="semaforo-strip">
+    <div class="sem-card s-green">
+      <span class="sem-icon">🟢</span>
+      <div class="sem-status">Pack Andromeda-ready</div>
+      <div class="sem-desc">Variação genuína nos 3 eixos. O algoritmo trata cada criativo como sinal distinto e distribui para públicos diferentes.</div>
+    </div>
+    <div class="sem-card s-yellow">
+      <span class="sem-icon">🟡</span>
+      <div class="sem-status">Risco moderado</div>
+      <div class="sem-desc">Alguns criativos competem pelo mesmo pool. Alcance limitado, CPM pode subir.</div>
+    </div>
+    <div class="sem-card s-red">
+      <span class="sem-icon">🔴</span>
+      <div class="sem-status">Penalizado</div>
+      <div class="sem-desc">O Andromeda agrupa seus anúncios. Você está pagando mais para alcançar menos pessoas.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- O QUE ENTREGA -->
+<section>
+  <div class="section-label">O que você recebe</div>
+  <div class="entrega-box">
+    <div class="entrega-grid">
+      <div class="entrega-item">
+        <h4>Análise & Estratégia</h4>
+        <ul>
+          <li>Diagnóstico Andromeda da sua estampa</li>
+          <li>Semáforo do pack com justificativa</li>
+          <li>6 conceitos com variação nos 3 eixos</li>
+          <li>Recomendação de estrutura de ad sets</li>
+        </ul>
+      </div>
+      <div class="entrega-item">
+        <h4>Imagens Prontas</h4>
+        <ul>
+          <li>6 mockups gerados com modelo em contexto real</li>
+          <li>Contextos e personas genuinamente distintos</li>
+          <li>Prontos para upload no Ads Manager</li>
+          <li>Sem edição necessária</li>
+        </ul>
+      </div>
+      <div class="entrega-item">
+        <h4>Copy & Entrega</h4>
+        <ul>
+          <li>6 legendas calibradas para o nicho da loja</li>
+          <li>Hashtags por conceito</li>
+          <li>PDF com briefing completo</li>
+          <li>Pasta com imagens em alta resolução</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PLANOS -->
+<section>
+  <div class="section-label">Escolha seu pack</div>
+  <div class="planos-grid">
+
+    <div class="plano">
+      <div class="plano-nome">Essencial</div>
+      <div class="plano-preco">R$127</div>
+      <div class="plano-desc">Para testar o método antes de escalar</div>
+      <ul class="plano-items">
+        <li>Análise Andromeda da estampa</li>
+        <li>3 conceitos diversificados</li>
+        <li>3 imagens geradas e prontas</li>
+        <li>3 copies calibradas para o nicho</li>
+        <li>PDF com briefing</li>
+      </ul>
+      <a href="https://wa.me/5511959519909?text=Oi!%20Quero%20o%20Pack%20Essencial%20do%20Criativo%20Andromeda%20(R%24127)%20🚀" target="_blank" class="plano-btn">Quero o Essencial</a>
+    </div>
+
+    <div class="plano featured">
+      <div class="plano-nome">Completo</div>
+      <div class="plano-preco">R$197</div>
+      <div class="plano-desc">Pack completo pronto para veicular</div>
+      <ul class="plano-items">
+        <li>Análise Andromeda completa</li>
+        <li>6 conceitos com semáforo 🟢</li>
+        <li>6 imagens geradas e prontas</li>
+        <li>6 copies + hashtags por conceito</li>
+        <li>PDF estratégico + pasta de arquivos</li>
+        <li>Recomendação de ad sets</li>
+      </ul>
+      <a href="https://wa.me/5511959519909?text=Oi!%20Quero%20o%20Pack%20Completo%20do%20Criativo%20Andromeda%20(R%24197)%20🚀" target="_blank" class="plano-btn">Quero o Completo</a>
+    </div>
+
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA FINAL -->
+<section style="padding: 80px 40px;">
+  <div class="cta-section">
+    <h2>PRONTO PARA <span>VEICULAR</span></h2>
+    <p>Você envia a estampa. A gente entrega o pack em até 48h.</p>
+    <a href="https://wa.me/5511959519909?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Criativo%20Andromeda%20🚀" target="_blank" class="wpp-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+      Falar no WhatsApp
+    </a>
+    <p class="cta-note">Resposta em até 2h em dias úteis · Entrega em até 48h</p>
+  </div>
+</section>
+
+<footer>
+  <p>Criativo <span>InKrível</span> — Powered by Meta Andromeda Framework · @podmodelos.ia</p>
+</footer>
+
+</body>
+</html>
